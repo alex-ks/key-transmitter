@@ -25,6 +25,7 @@ namespace KeyTransmitter.ConsoleClient
 
                 using (var transmitter = new Transmitter(hostname, port))
                 {
+                    Console.WriteLine("Connection established");
                     var key = Console.ReadKey();
                     while (key.Key != ConsoleKey.Escape)
                     {

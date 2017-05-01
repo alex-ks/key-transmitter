@@ -24,9 +24,9 @@ namespace KeyTransmitter.Client
             tcpStream.Write(BitConverter.GetBytes((int)key), 0, sizeof(int));
         }
 
-        public async Task SendKeyAsync(ConsoleKey key)
+        public Task SendKeyAsync(ConsoleKey key)
         {
-            await tcpStream.WriteAsync(BitConverter.GetBytes((int)key), 0, sizeof(int));
+            return tcpStream.WriteAsync(BitConverter.GetBytes((int)key), 0, sizeof(int));
         }
 
         public void Dispose()

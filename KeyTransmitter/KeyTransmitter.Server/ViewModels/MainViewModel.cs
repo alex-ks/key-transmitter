@@ -16,7 +16,14 @@ namespace KeyTransmitter.Server.ViewModels
         private string lastKey = "None";
         private string status = "No connection";
         private int port = 12200;
-        bool notStarted = true;
+        private bool notStarted = true;
+
+        private IWindowManager windowManager;
+
+        public MainViewModel(IWindowManager windowManager)
+        {
+            this.windowManager = windowManager;
+        }
 
         public string LastKey
         {
@@ -64,7 +71,7 @@ namespace KeyTransmitter.Server.ViewModels
             }
         }
 
-        async Task ProcessKeys(TcpClient client)
+        async Task ProcessKeys(TcpClient client, Action<string> notifier)
         {
             try
             {
@@ -78,7 +85,7 @@ namespace KeyTransmitter.Server.ViewModels
                     if (read < sizeof(int))
                         break;
                     var key = (ConsoleKey)BitConverter.ToInt32(buffer, 0);
-                    LastKey = key.ToString();
+                    notifier(key.ToString());
                     presser.PressKey(key);
                 }
             }
@@ -102,7 +109,13 @@ namespace KeyTransmitter.Server.ViewModels
                 listener.Start();
                 var client = await listener.AcceptTcpClientAsync();
                 Status = "Connection established";
-                Task.Factory.StartNew(() => ProcessKeys(client));
+
+                var keyModel = new KeyViewModel();
+                // creating delegate to update this.LastKey and keyModel.Key properties
+                Action<string> notifier = s => LastKey = s;
+                notifier += s => keyModel.Key = s;
+                Task.Factory.StartNew(() => ProcessKeys(client, notifier));
+                windowManager.ShowWindow(keyModel);
             }
             catch (Exception e)
             {

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using KeyTransmitter.Server.ViewModels;
 
 namespace KeyTransmitter.Server.Views
 {
@@ -20,9 +21,12 @@ namespace KeyTransmitter.Server.Views
     /// </summary>
     public partial class MainView : Window
     {
+       // KeyViewModel keyModel = new KeyViewModel();
         public MainView()
         {
             InitializeComponent();
+
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -30,5 +34,15 @@ namespace KeyTransmitter.Server.Views
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+         //   KeyViewModel.Show();
+         //   KeyViewModel.DataContext = this.DataContext;
+
+         //   KeyViewModel.Owner = this;
+        }
+
+        
     }
 }

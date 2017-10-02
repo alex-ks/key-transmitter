@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyTransmitter.Server.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,23 @@ namespace KeyTransmitter.Server.Views
     /// </summary>
     public partial class KeyView : Window
     {
+        
         public KeyView()
         {
             InitializeComponent();
+        }
+        
+
+        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            this.Hide();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Maximized;
+            this.WindowStyle = WindowStyle.None;
         }
     }
 }

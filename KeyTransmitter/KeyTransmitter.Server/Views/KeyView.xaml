@@ -5,10 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyTransmitter.Server.Views"
         mc:Ignorable="d"
-        Title="KeyView" Height="60" Width="200">
-    <Grid>
-        <TextBlock Text="{Binding Key}"
+        Title="KeyView" Height="600" Width="600" MouseDoubleClick="Window_MouseDoubleClick" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
+    
+    <Grid Background="Black">
+        <Ellipse x:Name="el" Fill="#FFE4E417" HorizontalAlignment="Center" Height="{Binding Rad}"  Stroke="Black" VerticalAlignment="Center" Width="{Binding Rad}" />
+        <TextBlock Text="{Binding Rad}" 
                    VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+                   HorizontalAlignment="Center" FontSize="20" Foreground="Red"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1.5*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+            <Image Grid.Column="{Binding ArmPlace}" Grid.Row="1" Stretch="Fill"   VerticalAlignment="Center"  Source="c:\\arm.jpg" RenderTransformOrigin="0.5,0.5" 
+                   Visibility="{Binding ArmNow, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
+        </Grid>
 </Window>
+

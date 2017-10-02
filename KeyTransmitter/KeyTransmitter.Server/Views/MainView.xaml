@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
-        Title="MainView" Height="250" Width="500" ResizeMode="NoResize">
+        Title="MainView" Height="250" Width="500" ResizeMode="NoResize"
+        KeyDown="Window_KeyDown">
 
-        <Window.InputBindings>
+    <Window.InputBindings>
         <KeyBinding Command="{Binding SomeCommand, RelativeSource={RelativeSource Self}}" Key="F5"></KeyBinding>
     </Window.InputBindings>
     

@@ -65,7 +65,35 @@ namespace KeyTransmitter.Server.ViewModels
         /// </summary>
 
 
+        public void KeyPressed(Key key)
+        {
+            switch (key)
+            {
+                case Key.A:
+                    // some work for A
+                    MessageBox.Show("A");
+                    break;
 
+                case Key.B:
+                    // some work for B
+                    MessageBox.Show("B");
+                    break;
+
+                case Key.C:
+                    // some work for C
+                    MessageBox.Show("C");
+                    break;
+
+                case Key.D:
+                    // some work for D
+                    MessageBox.Show("D");
+                    break;
+
+                default:
+                    //ignore
+                    break;
+            }
+        }
 
         private IWindowManager windowManager;
 

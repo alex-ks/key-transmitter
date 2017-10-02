@@ -21,7 +21,6 @@ namespace KeyTransmitter.Server.Views
     /// </summary>
     public partial class MainView : Window
     {
-       // KeyViewModel keyModel = new KeyViewModel();
         public MainView()
         {
             InitializeComponent();
@@ -43,6 +42,13 @@ namespace KeyTransmitter.Server.Views
          //   KeyViewModel.Owner = this;
         }
 
-        
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            // refactor later
+            var viewModel = DataContext as MainViewModel;
+            if (viewModel == null)
+                return;
+            viewModel.KeyPressed(e.Key);
+        }
     }
 }
